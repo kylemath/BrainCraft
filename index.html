@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainCraft - Minecraft in a Simulated Brain</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            color: #00ff00;
+            padding: 20px;
+            font-size: 14px;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 50%;
+            z-index: 100;
+            pointer-events: none;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        #inventory {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            background: rgba(0, 255, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00ff00;
+        }
+        
+        .inventory-slot {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #00ff00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .inventory-slot.active {
+            background: rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .block-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            color: #00ff00;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="ui">
+            <div>BrainCraft v1.0</div>
+            <div>Position: <span id="position">0, 0, 0</span></div>
+            <div>Looking at: <span id="lookingAt">None</span></div>
+        </div>
+        
+        <div id="crosshair"></div>
+        
+        <div id="inventory">
+            <div class="inventory-slot active" data-block="neuron">
+                <div class="block-icon" style="background: #ff6b6b;"></div>
+            </div>
+            <div class="inventory-slot" data-block="synapse">
+                <div class="block-icon" style="background: #4ecdc4;"></div>
+            </div>
+            <div class="inventory-slot" data-block="glial">
+                <div class="block-icon" style="background: #45b7d1;"></div>
+            </div>
+            <div class="inventory-slot" data-block="blood">
+                <div class="block-icon" style="background: #f39c12;"></div>
+            </div>
+            <div class="inventory-slot" data-block="tissue">
+                <div class="block-icon" style="background: #9b59b6;"></div>
+            </div>
+        </div>
+        
+        <div id="instructions">
+            WASD - Move<br>
+            Mouse - Look around<br>
+            Left Click - Break block<br>
+            Right Click - Place block<br>
+            1-5 - Select block type<br>
+            Space - Jump
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="brain-craft.js"></script>
+</body>
+</html>
